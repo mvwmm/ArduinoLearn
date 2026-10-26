@@ -57,6 +57,7 @@ void loop() {
     }
     Serial.println("Blink Sequence completed!");
   }
+  else if (userInput.start)
   else{
     Serial.println("Unknown command provided.");
   }
