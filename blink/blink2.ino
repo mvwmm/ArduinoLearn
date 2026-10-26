@@ -12,10 +12,30 @@ void setup(){
 void loop(){
     unsigned long currentMillis = millis(); // Assigning a positive number to variable currentMillis.
 
+    if (Serial.available() > 0){
+        String command = Serial.readStringUntil('\n');
+        command.trim();
+        command.toUpperCase();
+
+        if (command == "OFF"){
+            blinkingState = false;
+            Serial.println("Blinking disabled!");
+            // digitalWrite(LED_BUILTIN, OUTPUT);
+            // Uncomment the above light if u want the LED to turn off after the blinking is disabled
+        }
+        else if (command == "ON"){
+            blinkingState = true;
+            Serial.println("Blinking enabled!");
+        }
+        else{
+            Serial.println("Oii. No command like that exists bro. Try using on/off instead.");
+        }
+    }
+
     if (blinkingState && currentMillis - previousMillis >= interval){ // Since blinkingState is true by default, the first condition runs by default
                                                                       // And then it checks if 1 second or more than 1 second has been passed through
                                                                       // Arithmetic operation. If it has passed more or exactly 1 second then
-                                                                      // the for loop is going to be executed.
+                                                                      // the if loop is going to be executed.
 
         ledState = !ledState;                                         // flips the boolean value of ledState variable.
 
