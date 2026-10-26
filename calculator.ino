@@ -1,3 +1,4 @@
+
 void setup() {
   Serial.begin(115200);
   pinMode(LED_BUILTIN, OUTPUT);
@@ -31,27 +32,18 @@ void loop() {
   if (op == '+'){
     Serial.print("Result: ");
     Serial.println(num1+num2);
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(500);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(500);
+    BlinkLED();
   }
   else if (op == '-'){
     Serial.print("Result: ");
     Serial.println(num1-num2);
-    digitalWrite(LED_BUILTIN, HIGH);
-    delay(500);
-    digitalWrite(LED_BUILTIN, LOW);
-    delay(500);
+    BlinkLED();
   }
   else if (op == '/'){
     if (num2 != 0){
       Serial.print("Result: ");
       Serial.println(num1/num2);
-      digitalWrite(LED_BUILTIN, HIGH);
-      delay(500);
-      digitalWrite(LED_BUILTIN, LOW);
-      delay(500);
+      BlinkLED();
     }
     else{
       Serial.println("Cannot divide a number by 0.");
@@ -60,12 +52,18 @@ void loop() {
   else if (op == '*'){
     Serial.print("Result: ");
     Serial.println(num1*num2);
+    BlinkLED();
+  }
+  else{
+    Serial.println("Unknown operator provided.");
+  }
+}
+
+void BlinkLED(){
+  for (int i = 0; i < 6; i++){
     digitalWrite(LED_BUILTIN, HIGH);
     delay(500);
     digitalWrite(LED_BUILTIN, LOW);
     delay(500);
-  }
-  else{
-    Serial.print("Unknown operator provided.");
   }
 }
